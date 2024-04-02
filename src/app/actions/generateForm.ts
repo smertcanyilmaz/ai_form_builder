@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+import { saveForm } from "./mutateForms";
+
 export async function generateForm(
   prevState: {
     message: string;
@@ -52,16 +54,23 @@ export async function generateForm(
     });
     const json = await response.json();
 
-    revalidatePath("/");
+    const responseObj = JSON.parse(json.choices[0].message.content);
 
+    const dbFormId = await saveForm({
+      name: responseObj.name,
+      description: responseObj.description,
+      questions: responseObj.questions,
+    });
+
+    revalidatePath("/");
     return {
       message: "success",
-      data: json,
+      data: { formId: dbFormId },
     };
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     return {
-      message: "Failed to send request",
+      message: "Failed to create form",
     };
   }
 }

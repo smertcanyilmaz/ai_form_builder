@@ -16,4 +16,12 @@ export const {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async session({ session, user }: { session: Session; user?: User }) {
+      if (user && session?.user) {
+        session.user.id = user.id;
+      }
+      return session;
+    },
+  },
 });
