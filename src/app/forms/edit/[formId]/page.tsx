@@ -14,6 +14,12 @@ type Props = {
 export default async function page({ params }: Props) {
   const formId = params.formId;
 
+  if (!formId) {
+    return <div>Form not found</div>;
+  }
+
+  const session = await auth();
+  const userId = session?.user?.id;
   const form = await db.query.forms.findFirst({
     where: eq(forms.id, parseInt(formId)),
     with: {
@@ -25,24 +31,13 @@ export default async function page({ params }: Props) {
     },
   });
 
-  console.log(form, "form");
-
-  if (!formId) {
-    return;
-    <div>Form not found</div>;
-  }
-
-  const session = await auth();
-  const userId = session?.user?.id;
-
   if (userId !== form?.userId) {
-    return;
-    <div>You are not authorized to view this page </div>;
+    return <div>You are not authorized to view this page</div>;
   }
 
-  return (
-    <div>
-      {formId} <Form />
-    </div>
-  );
+  if (!form) {
+    return <div>Form not found</div>;
+  }
+
+  return <Form form={form} editMode={true} />;
 }
