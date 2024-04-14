@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -22,14 +22,14 @@ type Props = {
     fieldOptions: Array<FieldOptionSelectModel>;
   };
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function FormField({ element, value, onChange }: Props) {
   if (!element) return null;
 
   const components: any = {
-    Input: () => <Input />,
+    Input: () => <Input type="text" onChange={onChange} />,
     Switch: () => <Switch />,
     Textarea: () => <Textarea />,
     Select: () => (
