@@ -16,10 +16,11 @@ import {
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";
 import { Button } from "@/components/ui/button";
+import { publishForm } from "../actions/mutateForms";
 
 type Props = {
   form: Form;
-  editMode: boolean;
+  editMode?: boolean;
 };
 
 type QuestionWithOptionsModel = QuestionSelectModel & {
@@ -33,8 +34,12 @@ interface Form extends FormSelectModel {
 export default function Form(props: Props) {
   const form = useForm();
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = async (data: any) => {
     console.log(data);
+
+    if (props.editMode) {
+      await publishForm(props.form.id);
+    }
   };
 
   return (

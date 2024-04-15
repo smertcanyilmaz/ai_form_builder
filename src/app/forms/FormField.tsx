@@ -22,7 +22,7 @@ type Props = {
     fieldOptions: Array<FieldOptionSelectModel>;
   };
   value: string;
-  onChange: (value: string | ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value?: string | ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function FormField({ element, value, onChange }: Props) {

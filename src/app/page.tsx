@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <SessionProvider>
       <Header />
-      <main className="flex min-h-screen flex-col items-center  p-24">
+      <main className="flex min-h-screen flex-col items-center p-24">
         <FormGenerator />
         <FormsList forms={forms} />
       </main>
