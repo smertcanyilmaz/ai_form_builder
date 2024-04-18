@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Link2Icon } from "@radix-ui/react-icons";
 
 type Props = {
-  formId: string;
+  formId: number;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 };
