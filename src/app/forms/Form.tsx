@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import {
   FormSelectModel,
@@ -16,9 +15,10 @@ import {
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import FormField from "./FormField";
-import { publishForm } from "@/actions/mutateForms";
+
 import FormPublishSuccess from "./FormPublishSuccess";
 import { useRouter } from "next/navigation";
+import { publishForm } from "../actions/mutateForms";
 
 type Props = {
   form: Form;
@@ -33,10 +33,11 @@ interface Form extends FormSelectModel {
   questions: Array<QuestionWithOptionsModel>;
 }
 
-export default function Form(props: Props) {
+const Form = (props: Props) => {
   const form = useForm();
   const router = useRouter();
-  const [sucesssDialogOpen, setSuccessDialogOpen] = useState(false);
+  const { editMode } = props;
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
   const handleDialogChange = (open: boolean) => {
     setSuccessDialogOpen(open);
@@ -44,7 +45,7 @@ export default function Form(props: Props) {
 
   const onSubmit = async (data: any) => {
     console.log(data);
-    if (props.editMode) {
+    if (editMode) {
       await publishForm(props.form.id);
       setSuccessDialogOpen(true);
     } else {
@@ -93,40 +94,44 @@ export default function Form(props: Props) {
       <FormComponent {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid w-full max-w-3xl items-center gap-6 my-4"
+          className="grid w-full max-w-3xl items-center gap-6 my-4 text-left"
         >
           {props.form.questions.map(
-            (question: QuestionSelectModel, index: number) => (
-              <ShadcdnFormField
-                control={form.control}
-                name={`question_${question.id}`}
-                key={`${question.text}_${index}`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base mt-3">
-                      {index + 1}. {question.text}
-                    </FormLabel>
-                    <FormControl>
-                      <FormField
-                        element={question}
-                        key={index}
-                        value={field.value}
-                        onchange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            )
+            (question: QuestionWithOptionsModel, index: number) => {
+              return (
+                <ShadcdnFormField
+                  control={form.control}
+                  name={`question_${question.id}`}
+                  key={`${question.text}_${index}`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-base mt-3">
+                        {index + 1}. {question.text}
+                      </FormLabel>
+                      <FormControl>
+                        <FormField
+                          element={question}
+                          key={index}
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              );
+            }
           )}
-          <Button type="submit">{props.editMode ? "Publish" : "Submit"}</Button>
+          <Button type="submit">{editMode ? "Publish" : "Submit"}</Button>
         </form>
       </FormComponent>
       <FormPublishSuccess
         formId={props.form.id}
-        open={sucesssDialogOpen}
+        open={successDialogOpen}
         onOpenChange={handleDialogChange}
       />
     </div>
   );
-}
+};
+
+export default Form;
