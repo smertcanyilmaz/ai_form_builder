@@ -3,7 +3,7 @@ import DashboardNav from "@/components/navigation/navbar";
 import { SessionProvider } from "next-auth/react";
 import FormGenerator from "../form-generator";
 import { SidebarNavItem } from "@/types/nav-types";
-// import UpdgradeAccBtn from "@/components/navigation/updgradeAccBtn";
+import UpdgradeAccBtn from "@/components/navigation/updgradeAccBtn";
 
 export default function AdminLayout({
   children,
@@ -47,7 +47,7 @@ export default function AdminLayout({
       <div className="container grid gap-12 md:grid-cols-[200px_1fr] flex-1">
         <aside className="hidden w-[200px] flex-col md:flex pr-2 border-r justify-between">
           <DashboardNav items={dashboardConfig.sidebarNav} />
-          {/* <UpdgradeAccBtn /> */}
+          <UpdgradeAccBtn />
         </aside>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
           <header className="flex items-center">

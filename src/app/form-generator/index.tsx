@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,20 +11,27 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+
+import { generateForm } from "@/actions/generateForm";
 import { useFormState, useFormStatus } from "react-dom";
-import { generateForm } from "../actions/generateForm";
 
 import { useSession, signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { navigate } from "../actions/navigateToForm";
+
+import { Plus } from "lucide-react";
+// import { usePlausible } from "next-plausible";
 
 type Props = {};
 
-const initialState: { message: string; data?: any } = { message: "" };
+const initialState: {
+  message: string;
+  data?: any;
+} = {
+  message: "",
+};
 
 export function SubmitButton() {
   const { pending } = useFormStatus();
-
   return (
     <Button type="submit" disabled={pending}>
       {pending ? "Generating..." : "Generate"}
@@ -33,20 +39,21 @@ export function SubmitButton() {
   );
 }
 
-export default function FormGenerator({}: Props) {
+const FormGenerator = (props: Props) => {
   const [state, formAction] = useFormState(generateForm, initialState);
   const [open, setOpen] = useState(false);
   const session = useSession();
+  // const plausible = usePlausible();
 
   useEffect(() => {
     if (state.message === "success") {
       setOpen(false);
-      navigate(state.data.formid);
+      navigate(state.data.formId);
     }
-    console.log(state.data);
   }, [state.message]);
 
   const onFormCreate = () => {
+    // plausible("create-form");
     if (session.data?.user) {
       setOpen(true);
     } else {
@@ -56,7 +63,10 @@ export default function FormGenerator({}: Props) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <Button onClick={onFormCreate}>Create Form</Button>
+      <Button onClick={onFormCreate}>
+        <Plus className="w-4 h-4 mr-2" />
+        Create Form
+      </Button>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create New Form</DialogTitle>
@@ -78,4 +88,6 @@ export default function FormGenerator({}: Props) {
       </DialogContent>
     </Dialog>
   );
-}
+};
+
+export default FormGenerator;
