@@ -30,7 +30,7 @@ export default async function UpdgradeAccBtn(props: Props) {
         {formCount} out of {MAX_FREE_FROMS} forms generated.
       </p>
       <p>
-        <SubscribeBtn price="price_1P9e2SDRdzzh1Z4QBMOqsdmD" userId={userId} />{" "}
+        <SubscribeBtn price="price_1P9yWFDRdzzh1Z4Q1gV68TmD" userId={userId} />{" "}
         for unlimited forms.
       </p>
     </div>
