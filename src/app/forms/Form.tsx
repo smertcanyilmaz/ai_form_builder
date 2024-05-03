@@ -15,7 +15,6 @@ import {
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import FormField from "./FormField";
-
 import FormPublishSuccess from "./FormPublishSuccess";
 import { useRouter } from "next/navigation";
 import { publishForm } from "../actions/mutateForms";
@@ -44,7 +43,6 @@ const Form = (props: Props) => {
   };
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     if (editMode) {
       await publishForm(props.form.id);
       setSuccessDialogOpen(true);

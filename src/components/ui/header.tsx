@@ -21,7 +21,6 @@ function SignOut() {
 
 export default async function Header({}: Props) {
   const session = await auth();
-  console.log(session);
 
   return (
     <header className="border bottom-1 ">

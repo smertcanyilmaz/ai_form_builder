@@ -82,7 +82,7 @@ const FormGenerator = (props: Props) => {
           </div>
           <DialogFooter>
             <SubmitButton />
-            <Button variant="link">Create Manually</Button>
+            {/* <Button variant="link">Create Manually</Button> */}
           </DialogFooter>
         </form>
       </DialogContent>
