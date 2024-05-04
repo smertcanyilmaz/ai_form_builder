@@ -27,7 +27,10 @@ export default async function Header({}: Props) {
       <nav className="bg-white border-gray-200 px-4 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link href="/">
-            <h1>AI Form Builder</h1>
+            <div className="flex items-center gap-3">
+              <Image src="/robot.svg" width={32} height={32} alt="robot" />
+              <h1>AI Form Builder</h1>
+            </div>
           </Link>
           <div>
             {session?.user ? (
