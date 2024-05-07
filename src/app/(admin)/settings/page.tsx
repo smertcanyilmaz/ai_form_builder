@@ -4,8 +4,13 @@ import ManageSubscription from "./ManageSubscription";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { Metadata } from "next";
 
 type Props = {};
+
+export const metadata: Metadata = {
+  title: "Settings",
+};
 
 const page = async (props: Props) => {
   const session = await auth();

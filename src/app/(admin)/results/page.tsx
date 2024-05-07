@@ -4,8 +4,13 @@ import { InferSelectModel } from "drizzle-orm";
 import { forms } from "@/db/schema";
 import FormsPicker from "./FormsPicker";
 import ResultsDisplay from "./ResultsDisplay";
+import { Metadata } from "next";
 
 type Props = {};
+
+export const metadata: Metadata = {
+  title: "Results",
+};
 
 export default async function page({
   searchParams,
