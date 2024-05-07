@@ -8,7 +8,7 @@ import { Metadata } from "next";
 type Props = {};
 
 export const metadata: Metadata = {
-  title: " My Forms",
+  title: "My Forms",
 };
 
 export default async function page({}: Props) {
