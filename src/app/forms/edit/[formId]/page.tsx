@@ -12,24 +12,11 @@ type Props = {
   };
 };
 
-let formName: any = "";
+const formArr: Array<any> = [];
 
-let deneme = "mertcan";
-
-export const metadata: Metadata = {
-  title: `${deneme}`,
-};
-
-export default async function page({ params }: Props) {
+export const formInfo = async ({ params }: Props) => {
+  "use server";
   const formId = params.formId;
-  // const form = await formInfo({ params });
-
-  if (!formId) {
-    return <div>Form not found</div>;
-  }
-
-  const session = await auth();
-  const userId = session?.user?.id;
   const form = await db.query.forms.findFirst({
     where: eq(forms.id, parseInt(formId)),
     with: {
@@ -40,11 +27,38 @@ export default async function page({ params }: Props) {
       },
     },
   });
-  console.log(form?.name, "dfgdfgdfgfdgdf");
+  formArr.push(form);
+  return form;
+};
 
-  if (form?.name !== "") {
-    formName = form?.name;
+// const formArr: Array<any> = [];
+
+let formName: any = "";
+
+export const metadata: Metadata = {
+  title: `${formArr[0]?.name}`,
+};
+
+export default async function page({ params }: Props) {
+  const formId = params.formId;
+  const form = await formInfo({ params });
+
+  if (!formId) {
+    return <div>Form not found</div>;
   }
+
+  const session = await auth();
+  const userId = session?.user?.id;
+  // const form = await db.query.forms.findFirst({
+  //   where: eq(forms.id, parseInt(formId)),
+  //   with: {
+  //     questions: {
+  //       with: {
+  //         fieldOptions: true,
+  //       },
+  //     },
+  //   },
+  // });
 
   if (userId !== form?.userId) {
     return <div>You are not authorized to view this page</div>;
