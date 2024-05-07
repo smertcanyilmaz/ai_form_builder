@@ -12,11 +12,15 @@ type Props = {
   };
 };
 
-const formArr: Array<any> = [];
-
-export const formInfo = async ({ params }: Props) => {
-  "use server";
+export default async function page({ params }: Props) {
   const formId = params.formId;
+
+  if (!formId) {
+    return <div>Form not found</div>;
+  }
+
+  const session = await auth();
+  const userId = session?.user?.id;
   const form = await db.query.forms.findFirst({
     where: eq(forms.id, parseInt(formId)),
     with: {
@@ -27,38 +31,6 @@ export const formInfo = async ({ params }: Props) => {
       },
     },
   });
-  formArr.push(form);
-  return form;
-};
-
-// const formArr: Array<any> = [];
-
-let formName: any = "";
-
-export const metadata: Metadata = {
-  title: `${formArr[0]?.name}`,
-};
-
-export default async function page({ params }: Props) {
-  const formId = params.formId;
-  const form = await formInfo({ params });
-
-  if (!formId) {
-    return <div>Form not found</div>;
-  }
-
-  const session = await auth();
-  const userId = session?.user?.id;
-  // const form = await db.query.forms.findFirst({
-  //   where: eq(forms.id, parseInt(formId)),
-  //   with: {
-  //     questions: {
-  //       with: {
-  //         fieldOptions: true,
-  //       },
-  //     },
-  //   },
-  // });
 
   if (userId !== form?.userId) {
     return <div>You are not authorized to view this page</div>;
