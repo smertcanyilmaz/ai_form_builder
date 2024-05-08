@@ -26,6 +26,16 @@ const getForm = cache(async (formId: string) => {
   return form;
 });
 
+export async function generateStaticParams() {
+  const Uforms = await db.query.forms.findMany({
+    with: {
+      user: true,
+    },
+  });
+
+  return Uforms.map((form) => form.id);
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const form = await getForm(params.formId);
 
@@ -44,16 +54,6 @@ export default async function page({ params }: Props) {
   const session = await auth();
   const userId = session?.user?.id;
   const form = await getForm(formId);
-  // const form = await db.query.forms.findFirst({
-  //   where: eq(forms.id, parseInt(formId)),
-  //   with: {
-  //     questions: {
-  //       with: {
-  //         fieldOptions: true,
-  //       },
-  //     },
-  //   },
-  // });
 
   if (userId !== form?.userId) {
     return <div>You are not authorized to view this page</div>;
