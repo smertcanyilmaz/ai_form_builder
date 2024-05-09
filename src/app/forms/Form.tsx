@@ -18,7 +18,7 @@ import FormField from "./FormField";
 import FormPublishSuccess from "./FormPublishSuccess";
 import { useRouter } from "next/navigation";
 import { publishForm } from "../actions/mutateForms";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 
 type Props = {
   form: Form;
