@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import FormGenerator from "../form-generator";
+import FormGenerator from "../form-generator/FormGenerator";
 // import PlausibleProvider from "next-plausible";
 
 type Props = {};

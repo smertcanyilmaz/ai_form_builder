@@ -1,7 +1,7 @@
 import Header from "@/components/ui/header";
 import DashboardNav from "@/components/navigation/navbar";
 import { SessionProvider } from "next-auth/react";
-import FormGenerator from "../form-generator";
+import FormGenerator from "../form-generator/FormGenerator";
 import { SidebarNavItem } from "@/types/nav-types";
 import UpdgradeAccBtn from "@/components/navigation/updgradeAccBtn";
 
