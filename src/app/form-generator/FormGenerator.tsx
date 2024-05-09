@@ -20,7 +20,6 @@ import { navigate } from "../actions/navigateToForm";
 
 import { Plus } from "lucide-react";
 // import { usePlausible } from "next-plausible";
-// import { usePlausible } from "next-plausible";
 
 type Props = {};
 
@@ -49,9 +48,9 @@ const FormGenerator = (props: Props) => {
   useEffect(() => {
     if (state.message === "success") {
       setOpen(false);
-      navigate(state.data.formId);
+      // navigate(state.data.formId);
     }
-  }, [state.message, state.data.formId]);
+  }, [state.message]);
 
   const onFormCreate = () => {
     // plausible("create-form");
