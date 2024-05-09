@@ -39,6 +39,8 @@ export function SubmitButton() {
   );
 }
 
+export const revalidate = 0;
+
 const FormGenerator = (props: Props) => {
   const [state, formAction] = useFormState(generateForm, initialState);
   const [open, setOpen] = useState(false);
