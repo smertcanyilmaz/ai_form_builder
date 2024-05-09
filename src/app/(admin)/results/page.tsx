@@ -4,13 +4,13 @@ import { InferSelectModel } from "drizzle-orm";
 import { forms } from "@/db/schema";
 import FormsPicker from "./FormsPicker";
 import ResultsDisplay from "./ResultsDisplay";
-// import { Metadata } from "next";
+import { Metadata } from "next";
 
 type Props = {};
 
-// export const metadata: Metadata = {
-//   title: "Results",
-// };
+export const metadata: Metadata = {
+  title: "Results",
+};
 
 export default async function page({
   searchParams,
@@ -34,15 +34,14 @@ export default async function page({
 
   return (
     <div>
-      {/* <FormsPicker options={selectOptions} />
+      <FormsPicker options={selectOptions} />
       <ResultsDisplay
         formId={
           searchParams?.formId
             ? parseInt(searchParams.formId as string)
             : userForms[0].id
         }
-      /> */}{" "}
-      <p>error handling test</p>
+      />
     </div>
   );
 }

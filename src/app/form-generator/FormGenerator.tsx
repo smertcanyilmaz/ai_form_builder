@@ -48,7 +48,7 @@ const FormGenerator = (props: Props) => {
   useEffect(() => {
     if (state.message === "success") {
       setOpen(false);
-      // navigate(state.data.formId);
+      navigate(state.data.formId);
     }
   }, [state.message]);
 
