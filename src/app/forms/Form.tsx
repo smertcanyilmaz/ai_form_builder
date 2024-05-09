@@ -67,8 +67,12 @@ const Form = (props: Props) => {
         });
       }
 
-      const baseUrl =
-        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+      // const baseUrl =
+      //   process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+      //todo: vercel pro free trial (22.05.24) because of vercel timing limit for ai generating
+
+      const baseUrl = "https://ai-form-builder-psi.vercel.app";
 
       const response = await fetch(`${baseUrl}/api/form/new`, {
         method: "POST",
