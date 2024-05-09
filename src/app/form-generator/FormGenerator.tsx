@@ -45,12 +45,12 @@ const FormGenerator = (props: Props) => {
   const session = useSession();
   // const plausible = usePlausible();
 
-  useEffect(() => {
-    if (state.message === "success") {
-      setOpen(false);
-      navigate(state.data.formId);
-    }
-  }, [state.message]);
+  // useEffect(() => {
+  //   if (state.message === "success") {
+  //     setOpen(false);
+  //     navigate(state.data.formId);
+  //   }
+  // }, [state.message]);
 
   const onFormCreate = () => {
     // plausible("create-form");
