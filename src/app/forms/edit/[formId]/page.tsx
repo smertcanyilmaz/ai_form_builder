@@ -26,16 +26,6 @@ const getForm = cache(async (formId: string) => {
   return form;
 });
 
-export async function generateStaticParams() {
-  const Uforms = await db.query.forms.findMany({
-    with: {
-      user: true,
-    },
-  });
-
-  return Uforms.map((form) => form.id);
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const form = await getForm(params.formId);
 
