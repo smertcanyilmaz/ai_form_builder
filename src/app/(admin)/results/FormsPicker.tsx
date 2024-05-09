@@ -40,7 +40,7 @@ export default function FormsPicker(props: FormsPickerProps) {
     [searchParams]
   );
   return (
-    <div className="flex gap-2 items-center bg-red-500">
+    <div className="flex gap-2 items-center ">
       <Label className="font-bold">Select a form</Label>
       <Select
         value={formId}
