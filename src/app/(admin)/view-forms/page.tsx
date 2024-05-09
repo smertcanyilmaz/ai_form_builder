@@ -11,8 +11,6 @@ export const metadata: Metadata = {
   title: "My Forms",
 };
 
-export const revalidate = 0;
-
 export default async function page({}: Props) {
   const forms: InferSelectModel<typeof dbForms>[] = await getUserForms();
   return <FormsList forms={forms} />;

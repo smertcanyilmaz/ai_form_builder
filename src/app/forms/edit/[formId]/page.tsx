@@ -63,8 +63,6 @@ import { eq } from "drizzle-orm";
 import { auth } from "@/auth";
 import Form from "../../Form";
 
-export const revalidate = 0;
-
 const page = async ({
   params,
 }: {

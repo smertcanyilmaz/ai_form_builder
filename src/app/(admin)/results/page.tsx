@@ -34,14 +34,15 @@ export default async function page({
 
   return (
     <div>
-      <FormsPicker options={selectOptions} />
+      {/* <FormsPicker options={selectOptions} />
       <ResultsDisplay
         formId={
           searchParams?.formId
             ? parseInt(searchParams.formId as string)
             : userForms[0].id
         }
-      />
+      /> */}{" "}
+      <p>error handling test</p>
     </div>
   );
 }
